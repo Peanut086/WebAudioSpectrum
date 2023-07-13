@@ -1,0 +1,19 @@
+{
+    "manifest_version": 1,
+    "name": "WebAudioSpectrum",
+    "version": "0.0.1",
+    "author": "javaScript大王",
+    "author_link": "http://www.peanut.icu",
+    "description": "音频频谱显示",
+    "betterncm_version": ">=0.2.5",
+    "preview": "preview.png",
+    "loadAfter": ["LibFrontendPlay"],
+    "requirements": ["LibFrontendPlay"],
+    "injects": {
+        "Main": [
+            {
+                "file": "./dist/main.js"
+            }
+        ]
+    }
+}

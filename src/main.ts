@@ -31,6 +31,20 @@ plugin.onLoad((selfPlugin) => {
 	
 	betterncm.utils.waitForElement(".g-single").then((mainPlayer) => {
 		mainPlayer.appendChild(canvas);
+		
+		// 监听mainPlayer是否在可视区域
+		const observer = new IntersectionObserver((entries) => {
+			if (entries[0].intersectionRatio <= 0) {
+				draw.clear();
+			} else {
+				if (currentTarget) {
+					draw = new Draw(currentAudioAnalyser, ctx);
+					draw.drawBar();
+				}
+			}
+		})
+		
+		observer.observe(mainPlayer);
 	});
 	
 	betterncm.utils.waitForElement(".btnp").then((btn) => {
@@ -44,11 +58,9 @@ plugin.onLoad((selfPlugin) => {
 				// draw.drawBar();
 				
 				currentTarget.currentAudioPlayer.addEventListener("pause", (e) => {
-					console.log(`%c𝒑𝒆𝒂𝒏𝒖𝒕\n😏😣😆😁🤣😂\n调试时间:2023/7/15 19:14\n源文件:main.ts\n行号:49\n调试数据:`,'color:rgba(250,212,0,.85);background:rgba(199,21,133,.29);','暂停触发')
 					draw.clear();
 				})
 				currentTarget.currentAudioPlayer.addEventListener("play", (e) => {
-					console.log(`%c𝒑𝒆𝒂𝒏𝒖𝒕\n😏😣😆😁🤣😂\n调试时间:2023/7/15 19:15\n源文件:main.ts\n行号:52\n调试数据:`,'color:rgba(250,212,0,.85);background:rgba(199,21,133,.29);','播放触发')
 					draw = new Draw(currentAudioAnalyser, ctx);
 					draw.drawBar();
 				})
